@@ -1,4 +1,5 @@
-const { Client, Intents } = require("discord.js");
+const { Client, Intents, Collection } = require("discord.js");
+const Config = require('./Config/config.json')
 
 const client = new Client({ intents: [
     Intents.FLAGS.GUILDS,
@@ -19,10 +20,11 @@ const client = new Client({ intents: [
     Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
 ] });
 
-client.on("ready", () => console.log("Bot is online!"));
+client.commands = new Collection();
+client.aliases = new Collection();
 
-client.on("messageCreate", message => {
-	if (message.content == "hello") message.reply("Hello!");
-});
+require("./Handlers/event.js")(client)
+require("./Handlers/command.js")(client)
+require("./Database/databaseStart.js")()
 
-client.login("");
+client.login(Config.token);
