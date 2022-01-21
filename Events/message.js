@@ -55,6 +55,7 @@ module.exports = new Event({
                     owner_id: message.guild.ownerID,
                 })
             }
+            console.log(guild)
             if (!message.content.startsWith(guild.prefix || 'a!') || message.author.bot) return;
 
             const args = message.content.slice(guild.prefix.length || 'a!'.length).split(/ +/);

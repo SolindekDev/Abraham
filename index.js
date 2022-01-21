@@ -22,6 +22,7 @@ const client = new Client({ intents: [
 
 client.commands = new Collection();
 client.aliases = new Collection();
+client.queue = new Collection();
 
 require("./Handlers/event.js")(client)
 require("./Handlers/command.js")(client)
